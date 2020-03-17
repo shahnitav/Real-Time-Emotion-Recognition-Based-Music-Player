@@ -1,7 +1,6 @@
 import numpy as np
 import argparse
 import cv2
-from playsound import playsound
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
 from tensorflow.keras.layers import Conv2D
@@ -128,8 +127,6 @@ elif mode == "display":
             prediction = model.predict(cropped_img)
             maxindex = int(np.argmax(prediction))
             cv2.putText(frame, emotion_dict[maxindex], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-            if maxindex == 6:
-                playsound('audio.mp3')
 
         cv2.imshow('Video', cv2.resize(frame,(1600,960),interpolation = cv2.INTER_CUBIC))
         if cv2.waitKey(1) & 0xFF == ord('q'):
