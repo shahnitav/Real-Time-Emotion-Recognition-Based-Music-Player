@@ -2,20 +2,18 @@
 
 ## Introduction
 
-This project aims to classify the emotion on a person's face into one of **seven categories**, using deep convolutional neural networks. This repository is an implementation of [this](https://github.com/atulapra/Emotion-detection/blob/master/ResearchPaper.pdf) research paper. The model is trained on the **FER-2013** dataset which was published on International Conference on Machine Learning (ICML). This dataset consists of 35887 grayscale, 48x48 sized face images with **seven emotions** - angry, disgusted, fearful, happy, neutral, sad and surprised.
+Uses a CNN Model of 63.2% Accuracy to recognize emotion of a human from a live feed of a webcam and then using the result from that playing music in a music player, the music playlist gets updated based on the emotion change in the human. 
+
+This Project is an extension from the Live Emotion Detection Project by Atul Para which you can find here (https://github.com/atulapra/Emotion-detection)
 
 ## Dependencies
 
-* Python 3, [OpenCV 3 or 4](https://opencv.org/), [Tensorflow 1 or 2](https://www.tensorflow.org/)
+* Python 3, [OpenCV 3 or 4](https://opencv.org/), [Tensorflow 1 or 2](https://www.tensorflow.org/), PlaySound 1.2.2
 * To install the required packages, run `pip install -r requirements.txt`.
 
 ## Usage
 
-The repository is currently compatible with `tensorflow-2.0` and makes use of the Keras API using the `tensorflow.keras` library.
-
-* First, clone the repository with `git clone https://github.com/atulapra/Emotion-detection.git` and enter the cloned folder: `cd Emotion-detection`.
-
-* Download the FER-2013 dataset from [here](https://drive.google.com/file/d/1X60B-uR3NtqPd4oosdotpbDgy8KOfUdr/view?usp=sharing) and unzip it inside the `Tensorflow` folder. This will create the folder `data`.
+* First, clone the repository 
 
 * If you want to train this model or train after making changes to the model, use `python emotions.py --mode train`.
 

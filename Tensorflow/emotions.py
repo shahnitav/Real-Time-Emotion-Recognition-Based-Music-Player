@@ -1,7 +1,6 @@
 import numpy as np
 import argparse
 import cv2
-from playsound import playsound
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
 from tensorflow.keras.layers import Conv2D
@@ -126,9 +125,7 @@ elif mode == "display":
     #File to append the emotions
     path = "D:\Amisha\Real-Time-Emotion-Recognition-Based-Music-Player\Tensorflow"
     with open(path+"\emotion.txt","w") as emotion_file:
-        #music player setup 
-        #player = vlc.MediaPlayer("file:///path/to/track.mp3")
-
+        
         # start the webcam feed
         cap = cv2.VideoCapture(0)
         while True:
@@ -160,6 +157,6 @@ elif mode == "display":
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
+    
     cap.release()
     cv2.destroyAllWindows()
-
