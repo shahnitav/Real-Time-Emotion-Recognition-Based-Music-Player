@@ -10,6 +10,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import os
 import vlc
 import time
+from pathlib import Path
 from random import randint
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -46,8 +47,7 @@ def plot_model_history(model_history):
 #music player function
 def music_player(emotion_str):
     i = str(randint(1,6))
-    path = "D:\Amisha\Real-Time-Emotion-Recognition-Based-Music-Player\Tensorflow\songs"
-    player = vlc.MediaPlayer(path + "/" + emotion_str +"\song"+ i + ".mp3")
+    player = vlc.MediaPlayer(str(Path.cwd())+"\songs" + "/" + emotion_str +"\song"+ i + ".mp3")
     player.play()
     time.sleep(20)
     player.stop()
@@ -123,8 +123,7 @@ elif mode == "display":
     emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
 
     #File to append the emotions
-    path = "D:\Amisha\Real-Time-Emotion-Recognition-Based-Music-Player\Tensorflow"
-    with open(path+"\emotion.txt","w") as emotion_file:
+    with open(str(Path.cwd())+"\emotion.txt","w") as emotion_file:
         
         # start the webcam feed
         cap = cv2.VideoCapture(0)
