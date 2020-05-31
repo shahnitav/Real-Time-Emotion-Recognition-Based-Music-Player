@@ -119,7 +119,7 @@ elif mode == "display":
     # prevents openCL usage and unnecessary logging messages
     cv2.ocl.setUseOpenCL(False)
 
-    global text
+
 
     # dictionary which assigns each label an emotion (alphabetical order)
     emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
@@ -127,6 +127,7 @@ elif mode == "display":
 
     #File to append the emotions
     with open(str(Path.cwd())+"\emotion.txt","w") as emotion_file:
+        
         
         # start the webcam feed
         cap = cv2.VideoCapture(0)
@@ -160,6 +161,7 @@ elif mode == "display":
             if time.time() > future:  ##after 10second music will play
             
                 music_player(text)
+                future = time.time() + 10
                 
                 
 
