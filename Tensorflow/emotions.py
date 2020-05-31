@@ -119,14 +119,19 @@ elif mode == "display":
     # prevents openCL usage and unnecessary logging messages
     cv2.ocl.setUseOpenCL(False)
 
+    global text
+
     # dictionary which assigns each label an emotion (alphabetical order)
     emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
+
 
     #File to append the emotions
     with open(str(Path.cwd())+"\emotion.txt","w") as emotion_file:
         
         # start the webcam feed
         cap = cv2.VideoCapture(0)
+        now = time.time()  ###For calculate seconds of video
+        future = now + 10 
         while True:
             # Find haar cascade to draw bounding box around face
             ret, frame = cap.read()
@@ -143,19 +148,23 @@ elif mode == "display":
                 prediction = model.predict(cropped_img)
                 maxindex = int(np.argmax(prediction))
                 cv2.putText(frame, emotion_dict[maxindex], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                if maxindex == 3:
-                    #player = vlc.MediaPlayer("D:\Amisha\Real-Time-Emotion-Recognition-Based-Music-Player\Tensorflow\songs\Happy\song1.mp3")
-                    #player.play()
-                    #time.sleep(20)
-                    #player.stop()
-                    music_player(emotion_dict[maxindex])
+                text = emotion_dict[maxindex]
                 emotion_file.write(emotion_dict[maxindex]+"\n")
                 emotion_file.flush()
 
             cv2.imshow('Video', cv2.resize(frame,(1600,960),interpolation = cv2.INTER_CUBIC))
             if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+                break 
 
-    
-    cap.release()
+            
+            if time.time() > future:  ##after 10second music will play
+            
+                music_player(text)
+                
+                
+
+
+
+
     cv2.destroyAllWindows()
+    cap.release()
