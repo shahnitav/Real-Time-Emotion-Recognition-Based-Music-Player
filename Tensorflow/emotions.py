@@ -49,7 +49,7 @@ def music_player(emotion_str):
     i = str(randint(1,6))
     player = vlc.MediaPlayer(str(Path.cwd())+"\songs" + "/" + emotion_str +"\song"+ i + ".mp3")
     player.play()
-    time.sleep(20)
+    time.sleep(30)
     player.stop()
 
 
