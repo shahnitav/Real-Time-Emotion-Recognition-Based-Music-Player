@@ -1,21 +1,25 @@
 # Importing Required Modules & libraries
 from tkinter import *
 import os
+import vlc
 from pathlib import Path
+
+# Initiating VLC
+Instance = vlc.Instance()
+# Initiating VLC Player
+player = Instance.media_player_new()
+
 
 # Defining MusicPlayer Class
 class MusicPlayer:
   # Defining Constructor
-  def __init__(self,root):
+  def __init__(self,root,emotionStr):
     self.root = root
+    self.emotionStr = emotionStr
     # Title of the window
     self.root.title("Music Player")
     # Window Geometry
     self.root.geometry("1000x200+200+200")
-    # Initiating Pygame
-    #pygame.init()
-    # Initiating Pygame Mixer
-    #pygame.mixer.init()
     # Declaring track Variable
     self.track = StringVar()
     # Declaring Status Variable
@@ -50,7 +54,7 @@ class MusicPlayer:
     scrol_y.config(command=self.playlist.yview)
     self.playlist.pack(fill=BOTH)
     # Changing Directory for fetching Songs
-    os.chdir(str(Path.cwd())+"\Tensorflow\\songs")
+    os.chdir(str(Path.cwd())+"\songs\\"+self.emotionStr)
     # Fetching Songs
     songtracks = os.listdir()
     # Inserting Songs into Playlist
@@ -63,27 +67,28 @@ class MusicPlayer:
     # Displaying Status
     self.status.set("-Playing")
     # Loading Selected Song
-    #pygame.mixer.music.load(self.playlist.get(ACTIVE))
-    # Playing Selected Song
+    Media = Instance.media_new(self.playlist.get(ACTIVE))
+    player.set_media(Media)
+    player.play()
    # pygame.mixer.music.play()
   def stopsong(self):
     # Displaying Status
     self.status.set("-Stopped")
     # Stopped Song
-    #pygame.mixer.music.stop()
+    player.stop()
   def pausesong(self):
     # Displaying Status
     self.status.set("-Paused")
     # Paused Song
-    #pygame.mixer.music.pause()
+    player.pause()
   def unpausesong(self):
     # Displaying Status
     self.status.set("-Playing")
     # Playing back Song
-    #pygame.mixer.music.unpause()
+    player.pause()
 # Creating TK Container
 root = Tk()
 # Passing Root to MusicPlayer Class
-MusicPlayer(root)
+MusicPlayer(root,"Happy")
 # Root Window Looping
 root.mainloop()

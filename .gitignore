@@ -1,3 +1,5 @@
 .Tensorflow/emotion.txt
 .vscode/settings.json
 .tensorflow/emotion.txt
+Tensorflow/emotion.txt
+*.pyc
