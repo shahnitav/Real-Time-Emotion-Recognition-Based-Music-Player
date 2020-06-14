@@ -1,6 +1,7 @@
 import numpy as np
 import argparse
 import cv2
+import matplotlib as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
 from tensorflow.keras.layers import Conv2D
@@ -12,6 +13,8 @@ import vlc
 import time
 from pathlib import Path
 from random import randint
+from tkinter import *
+from musicplayer import MusicPlayer
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # command line argument
@@ -46,12 +49,8 @@ def plot_model_history(model_history):
 
 #music player function
 def music_player(emotion_str):
-    i = str(randint(1,6))
-    player = vlc.MediaPlayer(str(Path.cwd())+"\songs" + "/" + emotion_str +"\song"+ i + ".mp3")
-    player.play()
-    time.sleep(30)
-    player.stop()
-
+    root = Tk()
+    MusicPlayer(root,emotion_str)
 
 # Define data generators
 train_dir = 'data/train'
@@ -163,10 +162,6 @@ elif mode == "display":
                 music_player(text)
                 future = time.time() + 10
                 
-                
-
-
-
-
     cv2.destroyAllWindows()
     cap.release()
+
