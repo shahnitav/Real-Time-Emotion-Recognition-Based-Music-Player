@@ -3,6 +3,7 @@ from tkinter import *
 import os
 import vlc
 from pathlib import Path
+import random
 
 # Initiating VLC
 Instance = vlc.Instance()
@@ -11,11 +12,11 @@ player = Instance.media_player_new()
 
 
 # Defining MusicPlayer Class
-class MusicPlayer:
+class MusicPlayer(object):
   # Defining Constructor
   def __init__(self,root,emotionStr):
     self.root = root
-    self.emotionStr = emotionStr
+    print(emotionStr)
     # Title of the window
     self.root.title("Music Player")
     # Window Geometry
@@ -54,12 +55,20 @@ class MusicPlayer:
     scrol_y.config(command=self.playlist.yview)
     self.playlist.pack(fill=BOTH)
     # Changing Directory for fetching Songs
-    os.chdir(str(Path.cwd())+"\songs\\"+self.emotionStr)
+    os.chdir(str(Path(__file__).parent.absolute())+"\songs\\"+emotionStr+"\\")
     # Fetching Songs
     songtracks = os.listdir()
+    self.songtracks = songtracks
     # Inserting Songs into Playlist
     for track in songtracks:
       self.playlist.insert(END,track)
+    if(player.is_playing() == 0):
+      ranSong = random.choice(self.songtracks)
+      self.track.set(ranSong)
+      self.status.set("-Playing")
+      Media = Instance.media_new(ranSong)
+      player.set_media(Media)
+      player.play()
   # Defining Play Song Function
   def playsong(self):
     # Displaying Selected Song title
@@ -76,6 +85,7 @@ class MusicPlayer:
     self.status.set("-Stopped")
     # Stopped Song
     player.stop()
+    quit()
   def pausesong(self):
     # Displaying Status
     self.status.set("-Paused")
@@ -87,8 +97,7 @@ class MusicPlayer:
     # Playing back Song
     player.pause()
 # Creating TK Container
-root = Tk()
+#root = Tk()
 # Passing Root to MusicPlayer Class
-MusicPlayer(root,"Happy")
 # Root Window Looping
-root.mainloop()
+#root.mainloop()
