@@ -8,7 +8,7 @@ This Project is an extension from the Live Emotion Detection Project by Atul Par
 
 ## Dependencies
 
-* Python 3, [OpenCV 3 or 4](https://opencv.org/), [Tensorflow 1 or 2](https://www.tensorflow.org/), PlaySound 1.2.2
+* Python 3, [OpenCV 3 or 4](https://opencv.org/), [Tensorflow 2](https://www.tensorflow.org/), [Python-VLC](https://pypi.org/project/python-vlc/)
 * To install the required packages, run `pip install -r requirements.txt`.
 
 ## Usage
@@ -25,6 +25,7 @@ This Project is an extension from the Live Emotion Detection Project by Atul Par
   * `emotions.py` (file)
   * `haarcascade_frontalface_default.xml` (file)
   * `model.h5` (file)
+  * `musicplayer.py` (file)
 
 * This implementation by default detects emotions on all faces in the webcam feed.
 
@@ -42,11 +43,9 @@ This Project is an extension from the Live Emotion Detection Project by Atul Par
 
 * The emotion with maximum score is displayed on the screen.
 
-## Example Output
-
-![Mutiface](multiface.png)
 
 ## References
+* https://github.com/atulapra/Emotion-detection
 
 * "Challenges in Representation Learning: A report on three machine learning contests." I Goodfellow, D Erhan, PL Carrier, A Courville, M Mirza, B
    Hamner, W Cukierski, Y Tang, DH Lee, Y Zhou, C Ramaiah, F Feng, R Li,  

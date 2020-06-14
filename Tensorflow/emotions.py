@@ -14,7 +14,6 @@ import time
 from pathlib import Path
 from random import randint
 from tkinter import *
-from musicplayer import MusicPlayer
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # command line argument
@@ -49,8 +48,11 @@ def plot_model_history(model_history):
 
 #music player function
 def music_player(emotion_str):
+    from musicplayer import MusicPlayer
     root = Tk()
+    print('Playing ' + emotion_str + ' songs')
     MusicPlayer(root,emotion_str)
+    root.mainloop()
 
 # Define data generators
 train_dir = 'data/train'
@@ -158,7 +160,6 @@ elif mode == "display":
 
             
             if time.time() > future:  ##after 10second music will play
-            
                 music_player(text)
                 future = time.time() + 10
                 
