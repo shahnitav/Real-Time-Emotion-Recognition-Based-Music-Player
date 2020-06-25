@@ -133,7 +133,7 @@ elif mode == "display":
         # start the webcam feed
         cap = cv2.VideoCapture(0)
         now = time.time()  ###For calculate seconds of video
-        future = now + 10 
+        future = now + 10
         while True:
             # Find haar cascade to draw bounding box around face
             ret, frame = cap.read()
@@ -159,7 +159,7 @@ elif mode == "display":
                 break 
 
             
-            if time.time() > future:  ##after 10second music will play
+            if time.time() > future:  ##after 5 second music will play
                 music_player(text)
                 future = time.time() + 10
                 
