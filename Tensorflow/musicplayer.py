@@ -1,7 +1,9 @@
 # Importing Required Modules & libraries
 from tkinter import *
 import os
+import sys
 import vlc
+import argparse
 from pathlib import Path
 import random
 
@@ -9,6 +11,7 @@ import random
 Instance = vlc.Instance()
 # Initiating VLC Player
 player = Instance.media_player_new()
+
 
 
 # Defining MusicPlayer Class
@@ -84,7 +87,11 @@ class MusicPlayer(object):
     self.status.set("-Stopped")
     # Stopped Song
     player.stop()
-    quit()
+    self.root.destroy()
+    os.chdir(str(Path(__file__).parent.absolute()))
+    os.system("python emotions.py --mode display")
+    #quit()
+
   def pausesong(self):
     # Displaying Status
     self.status.set("-Paused")
@@ -100,3 +107,6 @@ class MusicPlayer(object):
 # Passing Root to MusicPlayer Class
 # Root Window Looping
 #root.mainloop()
+
+
+

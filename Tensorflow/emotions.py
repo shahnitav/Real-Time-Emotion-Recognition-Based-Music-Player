@@ -13,6 +13,7 @@ import vlc
 import time
 from pathlib import Path
 from random import randint
+from subprocess import call
 from tkinter import *
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -160,9 +161,9 @@ elif mode == "display":
 
             
             if time.time() > future:  ##after 5 second music will play
+                cv2.destroyAllWindows()
                 music_player(text)
                 future = time.time() + 10
                 
-    cv2.destroyAllWindows()
+    
     cap.release()
-
