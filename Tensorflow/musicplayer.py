@@ -1,7 +1,9 @@
 # Importing Required Modules & libraries
 from tkinter import *
 import os
+import sys
 import vlc
+import argparse
 from pathlib import Path
 import random
 
@@ -11,12 +13,12 @@ Instance = vlc.Instance()
 player = Instance.media_player_new()
 
 
+
 # Defining MusicPlayer Class
 class MusicPlayer(object):
   # Defining Constructor
   def __init__(self,root,emotionStr):
     self.root = root
-    print(emotionStr)
     # Title of the window
     self.root.title("Music Player")
     # Window Geometry
@@ -31,7 +33,7 @@ class MusicPlayer(object):
     # Inserting Song Track Label
     songtrack = Label(trackframe,textvariable=self.track,width=20,font=("times new roman",24,"bold"),bg="grey",fg="gold").grid(row=0,column=0,padx=10,pady=5)
     # Inserting Status Label
-    trackstatus = Label(trackframe,textvariable=self.status,font=("times new roman",24,"bold"),bg="grey",fg="gold").grid(row=0,column=1,padx=10,pady=5)
+    trackstatus = Label(trackframe,textvariable=self.status,font=("times new roman",18,"bold"),bg="grey",fg="gold").grid(row=0,column=1,padx=5,pady=5)
     # Creating Button Frame
     buttonframe = LabelFrame(self.root,text="Control Panel",font=("times new roman",15,"bold"),bg="grey",fg="white",bd=5,relief=GROOVE)
     buttonframe.place(x=0,y=100,width=600,height=100)
@@ -65,7 +67,7 @@ class MusicPlayer(object):
     if(player.is_playing() == 0):
       ranSong = random.choice(self.songtracks)
       self.track.set(ranSong)
-      self.status.set("-Playing")
+      self.status.set("-Playing "+emotionStr)
       Media = Instance.media_new(ranSong)
       player.set_media(Media)
       player.play()
@@ -85,7 +87,11 @@ class MusicPlayer(object):
     self.status.set("-Stopped")
     # Stopped Song
     player.stop()
-    quit()
+    self.root.destroy()
+    os.chdir(str(Path(__file__).parent.absolute()))
+    os.system("python emotions.py --mode display")
+    #quit()
+
   def pausesong(self):
     # Displaying Status
     self.status.set("-Paused")
@@ -101,3 +107,6 @@ class MusicPlayer(object):
 # Passing Root to MusicPlayer Class
 # Root Window Looping
 #root.mainloop()
+
+
+

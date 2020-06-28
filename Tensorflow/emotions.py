@@ -13,6 +13,7 @@ import vlc
 import time
 from pathlib import Path
 from random import randint
+from subprocess import call
 from tkinter import *
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -133,7 +134,7 @@ elif mode == "display":
         # start the webcam feed
         cap = cv2.VideoCapture(0)
         now = time.time()  ###For calculate seconds of video
-        future = now + 10 
+        future = now + 10
         while True:
             # Find haar cascade to draw bounding box around face
             ret, frame = cap.read()
@@ -159,10 +160,10 @@ elif mode == "display":
                 break 
 
             
-            if time.time() > future:  ##after 10second music will play
+            if time.time() > future:  ##after 5 second music will play
+                cv2.destroyAllWindows()
                 music_player(text)
                 future = time.time() + 10
                 
-    cv2.destroyAllWindows()
+    
     cap.release()
-
