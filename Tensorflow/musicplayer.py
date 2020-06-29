@@ -29,22 +29,23 @@ class MusicPlayer(object):
     self.status = StringVar()
     # Creating Track Frame for Song label & status label
     trackframe = LabelFrame(self.root,text="Song Track",font=("times new roman",15,"bold"),bg="grey",fg="white",bd=5,relief=GROOVE)
-    trackframe.place(x=0,y=0,width=600,height=100)
+    trackframe.place(x=0,y=0,width=620,height=100)
     # Inserting Song Track Label
     songtrack = Label(trackframe,textvariable=self.track,width=20,font=("times new roman",24,"bold"),bg="grey",fg="gold").grid(row=0,column=0,padx=10,pady=5)
     # Inserting Status Label
     trackstatus = Label(trackframe,textvariable=self.status,font=("times new roman",18,"bold"),bg="grey",fg="gold").grid(row=0,column=1,padx=5,pady=5)
     # Creating Button Frame
     buttonframe = LabelFrame(self.root,text="Control Panel",font=("times new roman",15,"bold"),bg="grey",fg="white",bd=5,relief=GROOVE)
-    buttonframe.place(x=0,y=100,width=600,height=100)
+    buttonframe.place(x=0,y=100,width=620,height=100)
     # Inserting Play Button
     playbtn = Button(buttonframe,text="PLAY",command=self.playsong,width=6,height=1,font=("times new roman",16,"bold"),fg="navyblue",bg="gold").grid(row=0,column=0,padx=10,pady=5)
     # Inserting Pause Button
     playbtn = Button(buttonframe,text="PAUSE",command=self.pausesong,width=8,height=1,font=("times new roman",16,"bold"),fg="navyblue",bg="gold").grid(row=0,column=1,padx=10,pady=5)
     # Inserting Unpause Button
-    playbtn = Button(buttonframe,text="UNPAUSE",command=self.unpausesong,width=10,height=1,font=("times new roman",16,"bold"),fg="navyblue",bg="gold").grid(row=0,column=2,padx=10,pady=5)
+    playbtn = Button(buttonframe,text="SHUFFLE",command=self.shufflesong,width=10,height=1,font=("times new roman",16,"bold"),fg="navyblue",bg="gold").grid(row=0,column=2,padx=10,pady=5)
     # Inserting Stop Button
     playbtn = Button(buttonframe,text="STOP",command=self.stopsong,width=6,height=1,font=("times new roman",16,"bold"),fg="navyblue",bg="gold").grid(row=0,column=3,padx=10,pady=5)
+    playbtn = Button(buttonframe,text="NEXT",command=self.nextsong,width=6,height=1,font=("times new roman",16,"bold"),fg="navyblue",bg="gold").grid(row=0,column=4,padx=10,pady=5)
     # Creating Playlist Frame
     songsframe = LabelFrame(self.root,text="Song Playlist",font=("times new roman",15,"bold"),bg="grey",fg="white",bd=5,relief=GROOVE)
     songsframe.place(x=600,y=0,width=400,height=200)
@@ -66,6 +67,7 @@ class MusicPlayer(object):
       self.playlist.insert(END,track)
     if(player.is_playing() == 0):
       ranSong = random.choice(self.songtracks)
+      self.pos = self.songtracks.index(ranSong)
       self.track.set(ranSong)
       self.status.set("-Playing "+emotionStr)
       Media = Instance.media_new(ranSong)
@@ -97,11 +99,36 @@ class MusicPlayer(object):
     self.status.set("-Paused")
     # Paused Song
     player.pause()
-  def unpausesong(self):
+  """ def unpausesong(self):
     # Displaying Status
     self.status.set("-Playing")
     # Playing back Song
-    player.pause()
+    player.pause() """
+
+  def nextsong(self):
+    i=0
+    while i< len(self.songtracks):
+      if i == self.pos:
+        i = i+1
+        nsong = self.songtracks[i]
+    player.stop()
+    self.track.set(nsong)
+    # Loading Selected Song
+    Media = Instance.media_new(nsong)
+    player.set_media(Media)
+    player.play()
+
+
+  def shufflesong(self):
+    self.status.set("-Shuffle Play")
+    song2 =random.choice(self.songtracks)
+    player.stop()
+    self.track.set(song2)
+    # Loading Selected Song
+    Media = Instance.media_new(song2)
+    player.set_media(Media)
+    player.play()
+      
 # Creating TK Container
 #root = Tk()
 # Passing Root to MusicPlayer Class

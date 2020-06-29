@@ -8,6 +8,7 @@ from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from keras.utils.vis_utils import plot_model
 import os
 import vlc
 import time
