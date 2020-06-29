@@ -110,7 +110,11 @@ class MusicPlayer(object):
     while i< len(self.songtracks):
       if i == self.pos:
         i = i+1
+        if i >= len(self.songtracks):
+          i= 0
         nsong = self.songtracks[i]
+        self.pos = i
+      i = i + 1
     player.stop()
     self.track.set(nsong)
     # Loading Selected Song
@@ -122,6 +126,7 @@ class MusicPlayer(object):
   def shufflesong(self):
     self.status.set("-Shuffle Play")
     song2 =random.choice(self.songtracks)
+    self.pos = self.songtracks.index(song2)
     player.stop()
     self.track.set(song2)
     # Loading Selected Song
