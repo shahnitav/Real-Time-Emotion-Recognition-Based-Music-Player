@@ -8,30 +8,31 @@ This Project is an extension from the Live Emotion Detection Project by Atul Par
 
 ## Dependencies
 
-* Python 3, [OpenCV 3 or 4](https://opencv.org/), [Tensorflow 2](https://www.tensorflow.org/), [Python-VLC](https://pypi.org/project/python-vlc/)
+* Python 3, [OpenCV 3 or 4](https://opencv.org/), [Tensorflow 2](https://www.tensorflow.org/), [Python-VLC](https://pypi.org/project/python-vlc/), Tkinter
 * To install the required packages, run `pip install -r requirements.txt`.
 
 ## Usage
 
 * First, clone the repository 
 
-* If you want to train this model or train after making changes to the model, use `python emotions.py --mode train`.
+* If you want to train this model or train after making changes to the model, use `python model_train.py`.
 
-* If you want to view the predictions without training again, you can download my pre-trained model `(model.h5)` from [here](https://drive.google.com/file/d/1FUn0XNOzf-nQV7QjbBPA6-8GLoHNNgv-/view?usp=sharing) and then run `python emotions.py --mode display`.
+* If you want to view the predictions without training again, you can download my pre-trained model `(model.h5)` from [here](https://drive.google.com/file/d/1FUn0XNOzf-nQV7QjbBPA6-8GLoHNNgv-/view?usp=sharing) and then run `python emotions.py`.
 
 * The folder structure is of the form:  
   Tensorflow:
   * data (folder)
+  * songs (folder)
+  * `model_train.py` (file)
   * `emotions.py` (file)
   * `haarcascade_frontalface_default.xml` (file)
   * `model.h5` (file)
   * `musicplayer.py` (file)
+  
+* To update the playlist as per your preferance, you can add them in the songs folder and categorize them in your favored emotion. 
 
 * This implementation by default detects emotions on all faces in the webcam feed.
 
-* With a simple 4-layer CNN, the test accuracy peaked at around 50 epochs at an accuracy of 63.2%.
-
-![Accuracy plot](accuracy.png)
 
 ## Algorithm
 
