@@ -3,7 +3,6 @@ from tkinter import *
 import os
 import sys
 import vlc
-import argparse
 from pathlib import Path
 import random
 
@@ -91,7 +90,7 @@ class MusicPlayer(object):
     player.stop()
     self.root.destroy()
     os.chdir(str(Path(__file__).parent.absolute()))
-    os.system("python emotions.py --mode display")
+    os.system("python emotions.py")
     #quit()
 
   def pausesong(self):

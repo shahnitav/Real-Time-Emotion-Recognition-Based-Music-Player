@@ -12,9 +12,6 @@ from random import randint
 from subprocess import call
 from tkinter import *
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '4'
-import warnings
-
-warnings.filterwarnings("ignore")
 
 #music player function
 def music_player(emotion_str):
@@ -87,7 +84,7 @@ with open(str(Path.cwd())+"\emotion.txt","w") as emotion_file:
             break 
 
         
-        if time.time() > future:  ##after 5 second music will play
+        if time.time() > future:  ##after 10 second music will play
             cv2.destroyAllWindows()
             music_player(text)
             future = time.time() + 10
