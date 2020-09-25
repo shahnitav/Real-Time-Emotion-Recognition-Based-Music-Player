@@ -1,5 +1,5 @@
 numpy==1.17.4
 opencv-python==4.2.0.32
-tensorflow==2.0.0
+tensorflow==2.0.3
 python-vlc==3.0.7110
 
